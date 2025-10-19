@@ -16,7 +16,6 @@ A modern, responsive frontend for a URL shortening service built with Tailwind C
 
 ## 🛠️ Tech Stack
 
-- **HTML5** - Semantic markup
 - **Tailwind CSS** - Utility-first CSS framework
 - **Alpine.js** - Lightweight JavaScript framework for interactions
 - **Lucide Icons** - Beautiful & consistent icons
