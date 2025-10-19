@@ -25,5 +25,5 @@ A modern, responsive frontend for a URL shortening service built with Tailwind C
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/url-shortener-frontend.git
+git clone https://github.com/iariaw/url-shortener-frontend.git
 cd url-shortener-frontend
