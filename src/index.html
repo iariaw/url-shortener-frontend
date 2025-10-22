@@ -1,0 +1,1010 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body
+    class="bg-white font-sans text-black"
+    x-data="{ 
+    mobileMenuOpen: false, 
+    signinModalOpen: false, 
+    signupModalOpen: false 
+}"
+  >
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-xs">
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="#" class="flex items-center space-x-2">
+              <i data-lucide="link" class="h-8 w-8 text-black"></i>
+              <span class="text-xl font-bold">URL Shortener</span>
+            </a>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <nav class="hidden items-center space-x-6 md:flex">
+            <a href="#home" class="text-black transition-colors duration-200 hover:text-gray-700">Home</a>
+            <a href="#pricing" class="text-black transition-colors duration-200 hover:text-gray-700">Pricing</a>
+            <a href="#testimonials" class="text-black transition-colors duration-200 hover:text-gray-700">Testimonials</a>
+            <a href="#faq" class="text-black transition-colors duration-200 hover:text-gray-700">FAQ</a>
+          </nav>
+
+          <!-- Desktop Account Button -->
+          <div class="hidden items-center space-x-4 md:flex">
+            <button @click="signinModalOpen = true" class="text-black transition-colors duration-200 hover:text-gray-700">Sign in</button>
+            <button @click="signupModalOpen = true" class="rounded-md bg-black px-4 py-2 text-white transition-colors duration-200 hover:bg-gray-800">Sign up</button>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="rounded-md p-2 text-black transition-colors duration-200 hover:bg-gray-100 md:hidden">
+            <i data-lucide="menu" x-show="!mobileMenuOpen" class="h-6 w-6"></i>
+            <i data-lucide="x" x-show="mobileMenuOpen" class="h-6 w-6"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="fixed inset-x-0 top-16 z-40 overflow-y-auto bg-white shadow-lg md:hidden" style="display: none;">
+        <div class="container mx-auto px-4 py-6">
+          <nav class="flex flex-col space-y-6">
+            <a href="#home" class="py-2 text-black transition-colors duration-200 hover:text-gray-700">Home</a>
+            <a href="#pricing" class="py-2 text-black transition-colors duration-200 hover:text-gray-700">Pricing</a>
+            <a href="#testimonials" class="py-2 text-black transition-colors duration-200 hover:text-gray-700">Testimonials</a>
+            <a href="#faq" class="py-2 text-black transition-colors duration-200 hover:text-gray-700">FAQ</a>
+          </nav>
+
+          <button @click="signinModalOpen = true; mobileMenuOpen = false" class="block w-full py-2 text-center text-black transition-colors duration-200 hover:text-gray-700">Sign in</button>
+          <button @click="signupModalOpen = true; mobileMenuOpen = false" class="mt-4 block w-full rounded-md bg-black py-3 text-center text-white transition-colors duration-200 hover:bg-gray-800">Sign up</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+      <!-- Hero Section -->
+      <section id="home" class="bg-white py-16 md:py-24">
+        <div class="container mx-auto px-4">
+          <div class="mx-auto max-w-4xl text-center">
+            <h1 class="mb-6 text-4xl font-bold md:text-6xl">
+              Short Links,
+              <span class="text-gray-700">Big Results</span>
+            </h1>
+            <p class="mb-8 text-lg leading-relaxed text-gray-600 md:text-xl">Create short, memorable links that drive engagement. Track performance with our powerful analytics dashboard.</p>
+
+            <!-- URL Shortener Form -->
+            <div class="mb-8 rounded-lg bg-gray-50 p-6">
+              <div class="flex flex-col gap-4 md:flex-row">
+                <input type="url" placeholder="Paste your long URL here..." class="flex-1 rounded-md border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black focus:outline-none" />
+                <button class="rounded-md bg-black px-6 py-3 font-medium text-white transition-colors duration-200 hover:bg-gray-800">Shorten URL</button>
+              </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+              <div class="text-center">
+                <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
+                  <i data-lucide="bar-chart-3" class="h-6 w-6 text-black"></i>
+                </div>
+                <h3 class="mb-2 font-semibold">Advanced Analytics</h3>
+                <p class="text-sm text-gray-600">Track clicks, locations, and referral sources</p>
+              </div>
+
+              <div class="text-center">
+                <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
+                  <i data-lucide="shield" class="h-6 w-6 text-black"></i>
+                </div>
+                <h3 class="mb-2 font-semibold">Secure & Reliable</h3>
+                <p class="text-sm text-gray-600">Enterprise-grade security and 99.9% uptime</p>
+              </div>
+
+              <div class="text-center">
+                <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
+                  <i data-lucide="zap" class="h-6 w-6 text-black"></i>
+                </div>
+                <h3 class="mb-2 font-semibold">Lightning Fast</h3>
+                <p class="text-sm text-gray-600">Instant redirection with global CDN</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- How It Works Section -->
+      <section class="bg-gray-50 py-16 md:py-24">
+        <div class="container mx-auto px-4">
+          <div class="mb-16 text-center">
+            <h2 class="mb-4 text-3xl font-bold md:text-4xl">How It Works</h2>
+            <p class="mx-auto max-w-2xl text-lg text-gray-600">Shorten your links in just a few simple steps and start tracking your audience</p>
+          </div>
+
+          <div class="mx-auto max-w-5xl">
+            <!-- Steps -->
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+              <!-- Step 1 -->
+              <div class="relative text-center">
+                <div class="mb-6 flex justify-center">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-bold text-white">1</div>
+                </div>
+                <div class="rounded-lg bg-white p-6 shadow-sm">
+                  <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
+                    <i data-lucide="link" class="h-6 w-6 text-black"></i>
+                  </div>
+                  <h3 class="mb-3 text-lg font-semibold">Paste Your URL</h3>
+                  <p class="text-sm text-gray-600">Copy and paste your long URL into the shortening tool</p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="relative text-center">
+                <div class="absolute top-6 left-1/2 -z-10 hidden h-0.5 w-full bg-gray-300 md:block"></div>
+                <div class="mb-6 flex justify-center">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-bold text-white">2</div>
+                </div>
+                <div class="rounded-lg bg-white p-6 shadow-sm">
+                  <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
+                    <i data-lucide="scissors" class="h-6 w-6 text-black"></i>
+                  </div>
+                  <h3 class="mb-3 text-lg font-semibold">Shorten & Customize</h3>
+                  <p class="text-sm text-gray-600">Generate a short link and customize it if needed</p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="relative text-center">
+                <div class="absolute top-6 right-1/2 -z-10 hidden h-0.5 w-full bg-gray-300 md:block"></div>
+                <div class="mb-6 flex justify-center">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-bold text-white">3</div>
+                </div>
+                <div class="rounded-lg bg-white p-6 shadow-sm">
+                  <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
+                    <i data-lucide="chart-bar" class="h-6 w-6 text-black"></i>
+                  </div>
+                  <h3 class="mb-3 text-lg font-semibold">Share & Track</h3>
+                  <p class="text-sm text-gray-600">Share your link and monitor performance with real-time analytics</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="mt-12 text-center">
+              <button class="rounded-md bg-black px-8 py-3 font-medium text-white transition-colors duration-200 hover:bg-gray-800">Get Started Now</button>
+              <p class="mt-4 text-sm text-gray-500">No credit card required • Free forever plan</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Statistics/Analytics Preview Section -->
+      <section class="bg-white py-16 md:py-24">
+        <div class="container mx-auto px-4">
+          <div class="mb-16 text-center">
+            <h2 class="mb-4 text-3xl font-bold md:text-4xl">Powerful Analytics</h2>
+            <p class="mx-auto max-w-2xl text-lg text-gray-600">Track your link performance with detailed insights and real-time data</p>
+          </div>
+
+          <div class="mx-auto max-w-6xl">
+            <!-- Stats Grid -->
+            <div class="mb-16 grid grid-cols-2 gap-6 md:grid-cols-4">
+              <div class="text-center">
+                <div class="mb-2 text-3xl font-bold text-black md:text-4xl">1.2M</div>
+                <p class="text-sm text-gray-600">Links Created</p>
+              </div>
+              <div class="text-center">
+                <div class="mb-2 text-3xl font-bold text-black md:text-4xl">45.8M</div>
+                <p class="text-sm text-gray-600">Total Clicks</p>
+              </div>
+              <div class="text-center">
+                <div class="mb-2 text-3xl font-bold text-black md:text-4xl">99.9%</div>
+                <p class="text-sm text-gray-600">Uptime</p>
+              </div>
+              <div class="text-center">
+                <div class="mb-2 text-3xl font-bold text-black md:text-4xl">24/7</div>
+                <p class="text-sm text-gray-600">Monitoring</p>
+              </div>
+            </div>
+
+            <!-- Analytics Dashboard Preview -->
+            <div class="rounded-xl bg-gray-950 p-6 shadow-lg shadow-blue-500/10 md:p-8">
+              <div class="mb-6 flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-white">Analytics Dashboard</h3>
+                <div class="flex space-x-2">
+                  <div class="h-3 w-3 rounded-full bg-red-500/90"></div>
+                  <div class="h-3 w-3 rounded-full bg-yellow-400/90"></div>
+                  <div class="h-3 w-3 rounded-full bg-emerald-500/90"></div>
+                </div>
+              </div>
+
+              <!-- Chart Container -->
+              <div class="mb-6 rounded-lg bg-gray-900/80 p-6">
+                <div class="mb-4 flex items-center justify-between">
+                  <span class="text-sm text-gray-300">Clicks Overview - Last 7 days</span>
+                  <span class="text-sm font-medium text-emerald-400">+12.4%</span>
+                </div>
+                <canvas id="clicksChart" height="130"></canvas>
+              </div>
+
+              <!-- Additional Metrics -->
+              <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                <div class="rounded-lg bg-gray-900/80 p-4">
+                  <div class="mb-2 flex items-center">
+                    <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-gray-800">
+                      <i data-lucide="map-pin" class="h-4 w-4 text-white"></i>
+                    </div>
+                    <span class="font-medium text-white">Top Locations</span>
+                  </div>
+                  <div class="text-sm text-gray-300">
+                    <div class="flex justify-between py-1"><span>United States</span><span>42%</span></div>
+                    <div class="flex justify-between py-1"><span>United Kingdom</span><span>23%</span></div>
+                    <div class="flex justify-between py-1"><span>Germany</span><span>15%</span></div>
+                  </div>
+                </div>
+
+                <div class="rounded-lg bg-gray-900/80 p-4">
+                  <div class="mb-2 flex items-center">
+                    <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-gray-800">
+                      <i data-lucide="smartphone" class="h-4 w-4 text-white"></i>
+                    </div>
+                    <span class="font-medium text-white">Devices</span>
+                  </div>
+                  <div class="text-sm text-gray-300">
+                    <div class="flex justify-between py-1"><span>Mobile</span><span>58%</span></div>
+                    <div class="flex justify-between py-1"><span>Desktop</span><span>35%</span></div>
+                    <div class="flex justify-between py-1"><span>Tablet</span><span>7%</span></div>
+                  </div>
+                </div>
+
+                <div class="rounded-lg bg-gray-900/80 p-4">
+                  <div class="mb-2 flex items-center">
+                    <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-gray-800">
+                      <i data-lucide="share-2" class="h-4 w-4 text-white"></i>
+                    </div>
+                    <span class="font-medium text-white">Referral Sources</span>
+                  </div>
+                  <div class="text-sm text-gray-300">
+                    <div class="flex justify-between py-1"><span>Social Media</span><span>47%</span></div>
+                    <div class="flex justify-between py-1"><span>Direct</span><span>32%</span></div>
+                    <div class="flex justify-between py-1"><span>Email</span><span>21%</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-12 text-center">
+              <button class="rounded-md bg-black px-8 py-3 font-medium text-white transition-colors duration-200 hover:bg-gray-800">View Full Analytics Dashboard</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing Section -->
+      <section id="pricing" class="bg-gray-50 py-16 md:py-24" x-data="{ billingPeriod: 'monthly' }">
+        <div class="container mx-auto px-4">
+          <div class="mb-16 text-center">
+            <h2 class="mb-4 text-3xl font-bold md:text-4xl">Simple, Transparent Pricing</h2>
+            <p class="mx-auto max-w-2xl text-lg text-gray-600">Choose the plan that fits your needs. All plans include our core features.</p>
+          </div>
+
+          <!-- Pricing Toggle -->
+          <div class="mb-12 flex justify-center">
+            <div class="inline-flex rounded-lg bg-white p-1 shadow-sm">
+              <button @click="billingPeriod = 'monthly'" :class="billingPeriod === 'monthly' ? 'bg-black text-white' : 'text-gray-600 hover:text-black'" class="rounded-md px-6 py-2 font-medium transition-colors duration-200">Monthly</button>
+              <button @click="billingPeriod = 'yearly'" :class="billingPeriod === 'yearly' ? 'bg-black text-white' : 'text-gray-600 hover:text-black'" class="rounded-md px-6 py-2 font-medium transition-colors duration-200">Yearly</button>
+            </div>
+          </div>
+
+          <div class="mx-auto max-w-5xl">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <!-- Free Plan -->
+              <div class="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+                <div class="mb-6 text-center">
+                  <h3 class="mb-2 text-2xl font-bold">Free</h3>
+                  <div class="mb-4 flex items-baseline justify-center">
+                    <span class="text-4xl font-bold">$0</span>
+                    <span class="ml-2 text-gray-600">/forever</span>
+                  </div>
+                  <p class="text-sm text-gray-600">Perfect for personal use and testing</p>
+                </div>
+
+                <ul class="mb-8 space-y-4">
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">100 links per month</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">Basic analytics</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">30-day click history</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">Standard support</span>
+                  </li>
+                  <li class="flex items-center opacity-50">
+                    <i data-lucide="x" class="mr-3 h-5 w-5 text-gray-400"></i>
+                    <span class="text-gray-500">Custom domains</span>
+                  </li>
+                  <li class="flex items-center opacity-50">
+                    <i data-lucide="x" class="mr-3 h-5 w-5 text-gray-400"></i>
+                    <span class="text-gray-500">Advanced analytics</span>
+                  </li>
+                </ul>
+
+                <button class="w-full rounded-md bg-gray-100 py-3 font-medium text-black transition-colors duration-200 hover:bg-gray-200">Get Started</button>
+              </div>
+
+              <!-- Pro Plan - Featured -->
+              <div class="relative rounded-xl border-2 border-black bg-white p-8 shadow-lg">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                  <span class="rounded-full bg-black px-4 py-1 text-sm font-medium text-white">Most Popular</span>
+                </div>
+
+                <div class="mb-6 text-center">
+                  <h3 class="mb-2 text-2xl font-bold">Pro</h3>
+                  <div class="mb-4 flex items-baseline justify-center">
+                    <template x-if="billingPeriod === 'monthly'">
+                      <div class="flex items-baseline">
+                        <span class="text-4xl font-bold">$9</span>
+                        <span class="ml-2 text-gray-600">/month</span>
+                      </div>
+                    </template>
+                    <template x-if="billingPeriod === 'yearly'">
+                      <div class="flex items-baseline">
+                        <span class="text-4xl font-bold">$90</span>
+                        <span class="ml-2 text-gray-600">/year</span>
+                        <span class="ml-2 rounded bg-green-50 px-2 py-1 text-sm text-green-500">Save $18</span>
+                      </div>
+                    </template>
+                  </div>
+                  <p class="text-sm text-gray-600">Ideal for professionals and small businesses</p>
+                </div>
+
+                <ul class="mb-8 space-y-4">
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">Unlimited links</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">Advanced analytics</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">1-year click history</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">Priority support</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">1 custom domain</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">QR code generation</span>
+                  </li>
+                </ul>
+
+                <button class="w-full rounded-md bg-black py-3 font-medium text-white transition-colors duration-200 hover:bg-gray-800">Start Free Trial</button>
+              </div>
+
+              <!-- Business Plan -->
+              <div class="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+                <div class="mb-6 text-center">
+                  <h3 class="mb-2 text-2xl font-bold">Business</h3>
+                  <div class="mb-4 flex items-baseline justify-center">
+                    <template x-if="billingPeriod === 'monthly'">
+                      <div class="flex items-baseline">
+                        <span class="text-4xl font-bold">$29</span>
+                        <span class="ml-2 text-gray-600">/month</span>
+                      </div>
+                    </template>
+                    <template x-if="billingPeriod === 'yearly'">
+                      <div class="flex items-baseline">
+                        <span class="text-4xl font-bold">$290</span>
+                        <span class="ml-2 text-gray-600">/year</span>
+                        <span class="ml-2 rounded bg-green-50 px-2 py-1 text-sm text-green-500">Save $58</span>
+                      </div>
+                    </template>
+                  </div>
+                  <p class="text-sm text-gray-600">For teams and high-volume needs</p>
+                </div>
+
+                <ul class="mb-8 space-y-4">
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">Unlimited links</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">Enterprise analytics</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">Unlimited history</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">24/7 phone support</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">5 custom domains</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="check" class="mr-3 h-5 w-5 text-green-500"></i>
+                    <span class="text-gray-700">Team collaboration</span>
+                  </li>
+                </ul>
+
+                <button class="w-full rounded-md bg-gray-100 py-3 font-medium text-black transition-colors duration-200 hover:bg-gray-200">Contact Sales</button>
+              </div>
+            </div>
+
+            <!-- FAQ Link -->
+            <div class="mt-12 text-center">
+              <p class="text-gray-600">Have questions? Check out our <a href="#" class="text-black underline hover:no-underline">FAQ</a> or <a href="#" class="text-black underline hover:no-underline">contact our team</a>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section id="testimonials" class="bg-white py-16 md:py-24">
+        <div class="container mx-auto px-4">
+          <div class="mb-16 text-center">
+            <h2 class="mb-4 text-3xl font-bold md:text-4xl">Trusted by Thousands</h2>
+            <p class="mx-auto max-w-2xl text-lg text-gray-600">See what our users are saying about their experience with URL Shortener</p>
+          </div>
+
+          <div class="mx-auto max-w-6xl">
+            <!-- Testimonials Grid -->
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <!-- Testimonial 1 -->
+              <div class="rounded-xl bg-gray-50 p-6">
+                <div class="mb-4 flex items-center">
+                  <div class="mr-2 flex items-center space-x-1 text-yellow-400">
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                  </div>
+                  <span class="text-sm text-gray-600">2 weeks ago</span>
+                </div>
+                <p class="mb-4 text-gray-700">"URL Shortener has completely transformed how we track our marketing campaigns. The analytics are incredibly detailed and easy to understand."</p>
+                <div class="flex items-center">
+                  <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300">
+                    <i data-lucide="user" class="h-5 w-5 text-gray-600"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold">Sarah Chen</div>
+                    <div class="text-sm text-gray-600">Marketing Director</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 2 -->
+              <div class="rounded-xl bg-gray-50 p-6">
+                <div class="mb-4 flex items-center">
+                  <div class="mr-2 flex items-center space-x-1 text-yellow-400">
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                  </div>
+                  <span class="text-sm text-gray-600">1 month ago</span>
+                </div>
+                <p class="mb-4 text-gray-700">"The custom domain feature is a game-changer for our brand. Our links look professional and our click-through rates have improved significantly."</p>
+                <div class="flex items-center">
+                  <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300">
+                    <i data-lucide="user" class="h-5 w-5 text-gray-600"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold">Marcus Rodriguez</div>
+                    <div class="text-sm text-gray-600">Startup Founder</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 3 -->
+              <div class="rounded-xl bg-gray-50 p-6">
+                <div class="mb-4 flex items-center">
+                  <div class="mr-2 flex items-center space-x-1 text-yellow-400">
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                  </div>
+                  <span class="text-sm text-gray-600">3 weeks ago</span>
+                </div>
+                <p class="mb-4 text-gray-700">"I've tried many URL shorteners, but URL Shortener's speed and reliability are unmatched. The interface is so intuitive and user-friendly."</p>
+                <div class="flex items-center">
+                  <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300">
+                    <i data-lucide="user" class="h-5 w-5 text-gray-600"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold">Emily Watson</div>
+                    <div class="text-sm text-gray-600">Content Creator</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 4 -->
+              <div class="rounded-xl bg-gray-50 p-6">
+                <div class="mb-4 flex items-center">
+                  <div class="mr-2 flex items-center space-x-1 text-yellow-400">
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                  </div>
+                  <span class="text-sm text-gray-600">2 months ago</span>
+                </div>
+                <p class="mb-4 text-gray-700">"The team collaboration features have made it so easy for our marketing team to work together on campaigns. Highly recommended for agencies!"</p>
+                <div class="flex items-center">
+                  <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300">
+                    <i data-lucide="user" class="h-5 w-5 text-gray-600"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold">David Kim</div>
+                    <div class="text-sm text-gray-600">Agency Owner</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 5 -->
+              <div class="rounded-xl bg-gray-50 p-6">
+                <div class="mb-4 flex items-center">
+                  <div class="mr-2 flex items-center space-x-1 text-yellow-400">
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                  </div>
+                  <span class="text-sm text-gray-600">1 week ago</span>
+                </div>
+                <p class="mb-4 text-gray-700">"As a developer, I appreciate the clean API documentation and webhook support. It integrated seamlessly with our existing systems."</p>
+                <div class="flex items-center">
+                  <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300">
+                    <i data-lucide="user" class="h-5 w-5 text-gray-600"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold">Alex Thompson</div>
+                    <div class="text-sm text-gray-600">Software Engineer</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 6 -->
+              <div class="rounded-xl bg-gray-50 p-6">
+                <div class="mb-4 flex items-center">
+                  <div class="mr-2 flex items-center space-x-1 text-yellow-400">
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                    <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                  </div>
+                  <span class="text-sm text-gray-600">3 months ago</span>
+                </div>
+                <p class="mb-4 text-gray-700">"The free plan is incredibly generous and perfect for my needs. I've been using it for my blog and the analytics provide great insights."</p>
+                <div class="flex items-center">
+                  <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300">
+                    <i data-lucide="user" class="h-5 w-5 text-gray-600"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold">Jessica Miller</div>
+                    <div class="text-sm text-gray-600">Blogger</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="mt-12 rounded-xl bg-black p-8">
+              <div class="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
+                <div>
+                  <div class="mb-2 text-2xl font-bold text-white md:text-3xl">10K+</div>
+                  <div class="text-sm text-gray-300">Happy Users</div>
+                </div>
+                <div>
+                  <div class="mb-2 text-2xl font-bold text-white md:text-3xl">4.9/5</div>
+                  <div class="text-sm text-gray-300">Average Rating</div>
+                </div>
+                <div>
+                  <div class="mb-2 text-2xl font-bold text-white md:text-3xl">98%</div>
+                  <div class="text-sm text-gray-300">Would Recommend</div>
+                </div>
+                <div>
+                  <div class="mb-2 text-2xl font-bold text-white md:text-3xl">24/7</div>
+                  <div class="text-sm text-gray-300">Support Available</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq" class="bg-gray-50 py-16 md:py-24">
+        <div class="container mx-auto px-4">
+          <div class="mb-16 text-center">
+            <h2 class="mb-4 text-3xl font-bold md:text-4xl">Frequently Asked Questions</h2>
+            <p class="mx-auto max-w-2xl text-lg text-gray-600">Find quick answers to common questions about URL Shortener</p>
+          </div>
+
+          <div class="mx-auto max-w-4xl">
+            <!-- FAQ Accordion -->
+            <div
+              x-data="{
+                openFaq: null,
+                toggleFaq(index) {
+                    this.openFaq = this.openFaq === index ? null : index
+                }
+            }"
+              class="space-y-4"
+            >
+              <!-- FAQ Item 1 -->
+              <div class="rounded-lg border border-gray-200 bg-white shadow-sm">
+                <button @click="toggleFaq(1)" class="flex w-full items-center justify-between px-6 py-4 text-left transition-colors duration-200 hover:bg-gray-50">
+                  <span class="text-lg font-semibold">How does URL Shortener work?</span>
+                  <i x-show="openFaq !== 1" data-lucide="plus" class="h-5 w-5 text-gray-600"></i>
+                  <i x-show="openFaq === 1" data-lucide="minus" class="h-5 w-5 text-gray-600"></i>
+                </button>
+                <div x-show="openFaq === 1" x-collapse class="px-6 pb-4">
+                  <p class="leading-relaxed text-gray-600">URL Shortener takes your long URLs and converts them into short, manageable links. When someone clicks your short link, they're instantly redirected to the original URL. We track all clicks and provide detailed analytics about your link's performance.</p>
+                </div>
+              </div>
+
+              <!-- FAQ Item 2 -->
+              <div class="rounded-lg border border-gray-200 bg-white shadow-sm">
+                <button @click="toggleFaq(2)" class="flex w-full items-center justify-between px-6 py-4 text-left transition-colors duration-200 hover:bg-gray-50">
+                  <span class="text-lg font-semibold">Is there a limit on free plan?</span>
+                  <i x-show="openFaq !== 2" data-lucide="plus" class="h-5 w-5 text-gray-600"></i>
+                  <i x-show="openFaq === 2" data-lucide="minus" class="h-5 w-5 text-gray-600"></i>
+                </button>
+                <div x-show="openFaq === 2" x-collapse class="px-6 pb-4">
+                  <p class="leading-relaxed text-gray-600">Our free plan allows you to create up to 100 links per month with basic analytics. You get 30 days of click history and standard support. It's perfect for personal use, testing, or low-volume needs.</p>
+                </div>
+              </div>
+
+              <!-- FAQ Item 3 -->
+              <div class="rounded-lg border border-gray-200 bg-white shadow-sm">
+                <button @click="toggleFaq(3)" class="flex w-full items-center justify-between px-6 py-4 text-left transition-colors duration-200 hover:bg-gray-50">
+                  <span class="text-lg font-semibold">Can I use my own custom domain?</span>
+                  <i x-show="openFaq !== 3" data-lucide="plus" class="h-5 w-5 text-gray-600"></i>
+                  <i x-show="openFaq === 3" data-lucide="minus" class="h-5 w-5 text-gray-600"></i>
+                </button>
+                <div x-show="openFaq === 3" x-collapse class="px-6 pb-4">
+                  <p class="leading-relaxed text-gray-600">Yes! Custom domains are available on our Pro and Business plans. You can connect your own domain to create branded short links that match your website. The Pro plan includes 1 custom domain, while Business includes 5.</p>
+                </div>
+              </div>
+
+              <!-- FAQ Item 4 -->
+              <div class="rounded-lg border border-gray-200 bg-white shadow-sm">
+                <button @click="toggleFaq(4)" class="flex w-full items-center justify-between px-6 py-4 text-left transition-colors duration-200 hover:bg-gray-50">
+                  <span class="text-lg font-semibold">What analytics do you provide?</span>
+                  <i x-show="openFaq !== 4" data-lucide="plus" class="h-5 w-5 text-gray-600"></i>
+                  <i x-show="openFaq === 4" data-lucide="minus" class="h-5 w-5 text-gray-600"></i>
+                </button>
+                <div x-show="openFaq === 4" x-collapse class="px-6 pb-4">
+                  <p class="mb-3 leading-relaxed text-gray-600">We provide comprehensive analytics including:</p>
+                  <ul class="list-inside list-disc space-y-2 text-gray-600">
+                    <li>Total clicks and unique visitors</li>
+                    <li>Geographic location of visitors</li>
+                    <li>Device and browser information</li>
+                    <li>Referral sources</li>
+                    <li>Click trends over time</li>
+                    <li>Operating system data</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- FAQ Item 5 -->
+              <div class="rounded-lg border border-gray-200 bg-white shadow-sm">
+                <button @click="toggleFaq(5)" class="flex w-full items-center justify-between px-6 py-4 text-left transition-colors duration-200 hover:bg-gray-50">
+                  <span class="text-lg font-semibold">How secure are the shortened links?</span>
+                  <i x-show="openFaq !== 5" data-lucide="plus" class="h-5 w-5 text-gray-600"></i>
+                  <i x-show="openFaq === 5" data-lucide="minus" class="h-5 w-5 text-gray-600"></i>
+                </button>
+                <div x-show="openFaq === 5" x-collapse class="px-6 pb-4">
+                  <p class="leading-relaxed text-gray-600">All links are served over HTTPS with enterprise-grade security. We perform regular malware scans and have automated systems to detect and block suspicious activity. Your data is encrypted and we never share your analytics with third parties.</p>
+                </div>
+              </div>
+
+              <!-- FAQ Item 6 -->
+              <div class="rounded-lg border border-gray-200 bg-white shadow-sm">
+                <button @click="toggleFaq(6)" class="flex w-full items-center justify-between px-6 py-4 text-left transition-colors duration-200 hover:bg-gray-50">
+                  <span class="text-lg font-semibold">Can I upgrade or downgrade my plan?</span>
+                  <i x-show="openFaq !== 6" data-lucide="plus" class="h-5 w-5 text-gray-600"></i>
+                  <i x-show="openFaq === 6" data-lucide="minus" class="h-5 w-5 text-gray-600"></i>
+                </button>
+                <div x-show="openFaq === 6" x-collapse class="px-6 pb-4">
+                  <p class="leading-relaxed text-gray-600">Yes, you can upgrade or downgrade your plan at any time. When upgrading, you'll get immediate access to the new features. When downgrading, the changes take effect at the end of your current billing cycle. No complicated processes - everything happens instantly from your account settings.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Support -->
+            <div class="mt-12 text-center">
+              <div class="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+                <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
+                  <i data-lucide="help-circle" class="h-6 w-6 text-black"></i>
+                </div>
+                <h3 class="mb-2 text-xl font-bold">Still have questions?</h3>
+                <p class="mx-auto mb-6 max-w-md text-gray-600">Can't find the answer you're looking for? Please chat with our friendly team.</p>
+                <div class="flex flex-col justify-center gap-4 sm:flex-row">
+                  <button class="rounded-md bg-black px-6 py-3 font-medium text-white transition-colors duration-200 hover:bg-gray-800">Contact Support</button>
+                  <button class="rounded-md border border-gray-300 px-6 py-3 font-medium text-black transition-colors duration-200 hover:bg-gray-50">Email Us</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA Section -->
+      <section class="bg-black py-16 md:py-24">
+        <div class="container mx-auto px-4">
+          <div class="mx-auto max-w-4xl text-center">
+            <!-- Icon -->
+            <div class="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-lg bg-white">
+              <i data-lucide="rocket" class="h-8 w-8 text-black"></i>
+            </div>
+
+            <!-- Heading -->
+            <h2 class="mb-6 text-3xl font-bold text-white md:text-5xl">Ready to Shorten Your Links?</h2>
+
+            <!-- Subtitle -->
+            <p class="mx-auto mb-8 max-w-2xl text-xl leading-relaxed text-gray-300">Join thousands of users who trust URL Shortener for their URL shortening needs. Start for free and upgrade when you're ready.</p>
+
+            <!-- CTA Buttons -->
+            <div class="mb-12 flex flex-col justify-center gap-4 sm:flex-row">
+              <button class="rounded-lg bg-white px-8 py-4 text-lg font-semibold text-black transition-colors duration-200 hover:bg-gray-100">Get Started Free</button>
+              <button class="rounded-lg border border-gray-600 px-8 py-4 text-lg font-semibold text-white transition-colors duration-200 hover:bg-gray-900">View Live Demo</button>
+            </div>
+
+            <!-- Features List -->
+            <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+              <div class="text-center">
+                <div class="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gray-800">
+                  <i data-lucide="zap" class="h-5 w-5 text-white"></i>
+                </div>
+                <h3 class="mb-2 font-semibold text-white">No Credit Card</h3>
+                <p class="text-sm text-gray-400">Start completely free, no payment required</p>
+              </div>
+
+              <div class="text-center">
+                <div class="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gray-800">
+                  <i data-lucide="clock" class="h-5 w-5 text-white"></i>
+                </div>
+                <h3 class="mb-2 font-semibold text-white">Set Up in 2 Minutes</h3>
+                <p class="text-sm text-gray-400">Get started and create your first link instantly</p>
+              </div>
+
+              <div class="text-center">
+                <div class="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gray-800">
+                  <i data-lucide="users" class="h-5 w-5 text-white"></i>
+                </div>
+                <h3 class="mb-2 font-semibold text-white">10,000+ Users</h3>
+                <p class="text-sm text-gray-400">Join our growing community of satisfied users</p>
+              </div>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="border-t border-gray-800 pt-8">
+              <p class="mb-6 text-sm text-gray-400">Trusted by teams at</p>
+              <div class="flex flex-wrap items-center justify-center gap-8 opacity-60">
+                <div class="text-lg font-semibold text-gray-300">TechCorp</div>
+                <div class="text-lg font-semibold text-gray-300">StartupXYZ</div>
+                <div class="text-lg font-semibold text-gray-300">InnovateCo</div>
+                <div class="text-lg font-semibold text-gray-300">DigitalAgency</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white pb-12">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col items-center justify-between md:flex-row">
+          <!-- Logo and Copyright -->
+          <div class="mb-6 flex items-center space-x-3 md:mb-0">
+            <i data-lucide="link" class="h-6 w-6 text-black"></i>
+            <span class="text-lg font-bold">URL Shortener</span>
+            <span class="text-sm text-gray-500">© 2024</span>
+          </div>
+
+          <!-- Links -->
+          <div class="mb-6 flex flex-wrap justify-center gap-6 md:mb-0">
+            <a href="#" class="text-sm text-gray-600 transition-colors duration-200 hover:text-black">Features</a>
+            <a href="#" class="text-sm text-gray-600 transition-colors duration-200 hover:text-black">Pricing</a>
+            <a href="#" class="text-sm text-gray-600 transition-colors duration-200 hover:text-black">API</a>
+            <a href="#" class="text-sm text-gray-600 transition-colors duration-200 hover:text-black">Help</a>
+            <a href="#" class="text-sm text-gray-600 transition-colors duration-200 hover:text-black">Privacy</a>
+            <a href="#" class="text-sm text-gray-600 transition-colors duration-200 hover:text-black">Terms</a>
+          </div>
+
+          <!-- Social Links -->
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 transition-colors duration-200 hover:text-black">
+              <i data-lucide="twitter" class="h-5 w-5"></i>
+            </a>
+            <a href="#" class="text-gray-400 transition-colors duration-200 hover:text-black">
+              <i data-lucide="github" class="h-5 w-5"></i>
+            </a>
+            <a href="#" class="text-gray-400 transition-colors duration-200 hover:text-black">
+              <i data-lucide="linkedin" class="h-5 w-5"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Sign In Modal -->
+    <div x-show="signinModalOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" style="display: none;" @click.self="signinModalOpen = false">
+      <div class="mx-4 w-full max-w-md rounded-xl bg-white shadow-2xl">
+        <div class="p-6">
+          <h3 class="mb-6 text-center text-2xl font-bold">Welcome Back</h3>
+
+          <form class="space-y-4">
+            <div>
+              <label for="signin-email" class="mb-2 block text-sm font-medium text-gray-700"> Email Address </label>
+              <input type="email" id="signin-email" placeholder="Enter your email" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black focus:outline-none" required />
+            </div>
+
+            <div>
+              <label for="signin-password" class="mb-2 block text-sm font-medium text-gray-700"> Password </label>
+              <input type="password" id="signin-password" placeholder="Enter your password" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black focus:outline-none" required />
+            </div>
+
+            <div class="flex items-center justify-between">
+              <label class="flex items-center">
+                <input type="checkbox" class="rounded border-gray-300 text-black focus:ring-black" />
+                <span class="ml-2 text-sm text-gray-600">Remember me</span>
+              </label>
+              <a href="#" class="text-sm text-black hover:underline">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="w-full rounded-lg bg-black py-3 font-semibold text-white transition-colors duration-200 hover:bg-gray-800">Sign In</button>
+          </form>
+
+          <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">
+              Don't have an account?
+              <button @click="signinModalOpen = false; signupModalOpen = true" class="font-semibold text-black hover:underline">Sign up</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sign up Modal -->
+    <div x-show="signupModalOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" style="display: none;" @click.self="signupModalOpen = false">
+      <div class="mx-4 w-full max-w-md rounded-xl bg-white shadow-2xl">
+        <div class="p-6">
+          <h3 class="mb-6 text-center text-2xl font-bold">Create Account</h3>
+
+          <form class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="signup-firstname" class="mb-2 block text-sm font-medium text-gray-700"> First Name </label>
+                <input type="text" id="signup-firstname" placeholder="First name" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black focus:outline-none" required />
+              </div>
+              <div>
+                <label for="signup-lastname" class="mb-2 block text-sm font-medium text-gray-700"> Last Name </label>
+                <input type="text" id="signup-lastname" placeholder="Last name" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black focus:outline-none" required />
+              </div>
+            </div>
+
+            <div>
+              <label for="signup-email" class="mb-2 block text-sm font-medium text-gray-700"> Email Address </label>
+              <input type="email" id="signup-email" placeholder="Enter your email" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black focus:outline-none" required />
+            </div>
+
+            <div>
+              <label for="signup-password" class="mb-2 block text-sm font-medium text-gray-700"> Password </label>
+              <input type="password" id="signup-password" placeholder="Create a password" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black focus:outline-none" required />
+            </div>
+
+            <div>
+              <label for="signup-confirm-password" class="mb-2 block text-sm font-medium text-gray-700"> Confirm Password </label>
+              <input type="password" id="signup-confirm-password" placeholder="Confirm your password" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black focus:outline-none" required />
+            </div>
+
+            <label class="flex items-start">
+              <input type="checkbox" class="mt-1 rounded border-gray-300 text-black focus:ring-black" />
+              <span class="ml-2 text-sm text-gray-600"> I agree to the <a href="#" class="text-black hover:underline">Terms of Service</a> and <a href="#" class="text-black hover:underline">Privacy Policy</a> </span>
+            </label>
+
+            <button type="submit" class="w-full rounded-lg bg-black py-3 font-semibold text-white transition-colors duration-200 hover:bg-gray-800">Create Account</button>
+          </form>
+
+          <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">
+              Already have an account?
+              <button @click="signupModalOpen = false; signinModalOpen = true" class="font-semibold text-black hover:underline">Sign in</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script defer src="./assets/js/alpine.js"></script>
+    <script src="./assets/js/chart.js"></script>
+    <script src="../node_modules/lucide/dist/umd/lucide.min.js"></script>
+
+    <script>
+      // Initialize Lucide icons
+      lucide.createIcons();
+
+      // Update icons when Alpine state changes
+      document.addEventListener('alpine:init', () => {
+              Alpine.effect(() => {
+              // This will re-run when mobileMenuOpen changes
+                  const menuOpen = Alpine.$data(document.body).mobileMenuOpen;
+              // Re-initialize icons to update the visible ones
+              setTimeout(() => {
+                  lucide.createIcons();
+              }, 10);
+          });
+      });
+
+      // Chart
+      const ctx = document.getElementById("clicksChart").getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+      gradient.addColorStop(0, "rgba(6,182,212,0.5)"); // cyan tone
+      gradient.addColorStop(1, "rgba(6,182,212,0)");
+
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          datasets: [
+            {
+              label: "Clicks",
+              data: [1200, 1900, 2200, 2400, 2000, 1800, 2000],
+              borderColor: "#06B6D4",
+              backgroundColor: gradient,
+              fill: true,
+              tension: 0.4,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              ticks: { color: "#9CA3AF" },
+              grid: { color: "#374151" },
+            },
+            x: {
+              ticks: { color: "#9CA3AF" },
+              grid: { display: false },
+            },
+          },
+          plugins: {
+            legend: { display: false },
+          },
+          elements: { line: { borderWidth: 2 } },
+        },
+      });
+    </script>
+  </body>
+</html>
